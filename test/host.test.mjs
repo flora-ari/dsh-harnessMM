@@ -46,7 +46,14 @@ function fakeContext(selectorText = 'A') {
       return { reasoning: { efforts: [{ id: 'low' }, { id: 'high' }] } };
     },
   };
+  const disposers = [];
   const ctx = {
+    // Cordis lifecycle seam: effects run their factory and return a disposer.
+    effect: (factory) => {
+      const disposer = factory();
+      if (typeof disposer === 'function') disposers.push(disposer);
+      return () => {};
+    },
     tools: {
       register: (definition) => registered.tools.push(definition),
       schemas: () => CATALOG,
@@ -57,7 +64,7 @@ function fakeContext(selectorText = 'A') {
     on: (event, handler) => registered.handlers.set(event, handler),
     get: (name) => (name === 'llm' ? llm : undefined),
   };
-  return { ctx, registered, llm };
+  return { ctx, registered, llm, disposers };
 }
 
 function authoringStream(text, call, totalTokens = 1400) {

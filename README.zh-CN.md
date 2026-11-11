@@ -70,6 +70,21 @@ dsh plugin --profile headless add /path/to/dsh-harnessMM
 
 补丁层会 *整体替换* 一行的 `config`，不做深合并；只改一个开关也要把整块重述。
 
+## 设置里的开关
+
+除宿主半之外，包里还带一个**客户端半**（`dsh.client`、`exports["./client"]`）。profile 加载后，
+设置里会多出一行 **HarnessMM**（就在「插件」之后），整行只有一个开关：
+
+- 开启是绿色 **Y**，关闭是红色 **N**，字母画在轨道内部、与滑块相对的一侧；
+- 开关通过 `ctx.configForms.get('harnessmm')` 写插件自己的设置命名空间里的 `policy.enabled`
+  ——与内置插件配置页用的是同一个服务——因此按 profile 持久生效，宿主无需重装即可读到；
+- 标签下方的提示会说明当前值的含义，或说明为什么改不了（配置不可用、只读 profile、宿主拒绝了写入）。
+
+客户端半分只在 web/桌面 profile 生效（`"client": { "platform": "web" }`）；`headless` 与 `sdk`
+没有设置界面，不会加载它，宿主半不受影响。
+
+`dsh plugin add` 之后请重启一次应用，让 profile 提供新的客户端入口。
+
 ## 配置
 
 | 字段 | 默认 | 含义 |

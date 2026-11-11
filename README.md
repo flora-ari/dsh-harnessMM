@@ -91,6 +91,26 @@ To manage it by hand, add the same row to a profile patch:
 A patch layer *replaces* a row's whole `config`; it never deep-merges. To change one knob,
 restate the full block.
 
+## The Settings switch
+
+Besides the host half, the package ships a **client half** (`dsh.client`, `exports["./client"]`).
+Once the profile loads it, Settings gains one **HarnessMM** row — directly after Plugins — whose only
+control is a single on/off switch:
+
+- green **Y** when the controller is on, red **N** when it is off, the letter drawn *inside* the
+  track opposite the thumb;
+- the switch writes `policy.enabled` in the plugin's own settings namespace through
+  `ctx.configForms.get('harnessmm')` — the same service the built-in plugin configuration pages
+  use — so the choice persists per profile exactly like editing the config by hand, and the host
+  picks it up without reinstalling the plugin;
+- the hint under the label states what the current value means, or why it cannot be edited
+  (configuration unavailable, read-only profile, or a write the host refused).
+
+The client half is web-only (`"client": { "platform": "web" }`). `headless` and `sdk` profiles
+mount no settings UI and never load it; the host half is unaffected.
+
+After `dsh plugin add`, restart the app once so the profile serves the new client entry.
+
 ## Configuration
 
 | Field | Default | Meaning |

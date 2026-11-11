@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.1.0
+
+- **Settings switch.** The package now ships a client half (`dsh.client`,
+  `exports["./client"]`). It registers a HarnessMM row in the Settings
+  navigation whose only control is an inline-prompt Y/N switch — green when on,
+  red when off, the letter inside the track opposite the thumb. The switch writes
+  `policy.enabled` through `ctx.configForms`, the same settings namespace the
+  built-in plugin configuration page edits, so the choice persists per profile.
+- Host state is released with the plugin fiber: reloading a profile no longer
+  keeps the previous session map alive.
+- Client-half contract tests: module id, Cordis client shape, section
+  registration, injected form face, and the exact write the switch performs.
+
 ## 1.0.0
 
 First standalone release of HarnessMM for DeepSeek Harness.

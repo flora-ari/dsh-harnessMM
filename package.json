@@ -1,6 +1,6 @@
 {
   "name": "dsh-harnessmm",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "HarnessMM for DeepSeek Harness — guarded decision reuse over the native tool surface: the model authors one CHISEL action bank, every candidate carries a receipt-local guard, and a certified native substitution replaces the slow reasoning callback when that guard already holds.",
   "type": "module",
   "license": "Apache-2.0",
@@ -21,10 +21,12 @@
     "./plan": "./lib/plan.mjs",
     "./cordis.patch.yml": "./cordis.patch.yml",
     "./package.json": "./package.json",
-    "./locale/*.json": "./locale/*.json"
+    "./locale/*.json": "./locale/*.json",
+    "./client": "./client.js"
   },
   "files": [
     "lib",
+    "client.js",
     "locale",
     "cordis.patch.yml",
     "README.md",
@@ -37,7 +39,7 @@
     "node": ">=22"
   },
   "scripts": {
-    "test": "node --test test/protocol.test.mjs test/host.test.mjs",
+    "test": "node --test test/protocol.test.mjs test/host.test.mjs test/client.test.mjs",
     "test:live": "node test/live-headless.mjs",
     "check": "node --check lib/protocol.mjs && node --check lib/plan.mjs && node --check lib/config.mjs && node --check lib/index.js"
   },
@@ -66,6 +68,9 @@
         "web",
         "desktop"
       ]
+    },
+    "client": {
+      "platform": "web"
     }
   }
 }
