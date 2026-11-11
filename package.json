@@ -1,0 +1,71 @@
+{
+  "name": "dsh-harnessmm",
+  "version": "1.0.0",
+  "description": "HarnessMM for DeepSeek Harness — guarded decision reuse over the native tool surface: the model authors one CHISEL action bank, every candidate carries a receipt-local guard, and a certified native substitution replaces the slow reasoning callback when that guard already holds.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "author": "flora-ari",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "harnessmm",
+    "agent-harness",
+    "token-efficiency",
+    "decision-reuse",
+    "chisel"
+  ],
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./protocol": "./lib/protocol.mjs",
+    "./plan": "./lib/plan.mjs",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "lib",
+    "locale",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh-CN.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test test/protocol.test.mjs test/host.test.mjs",
+    "test:live": "node test/live-headless.mjs",
+    "check": "node --check lib/protocol.mjs && node --check lib/plan.mjs && node --check lib/config.mjs && node --check lib/index.js"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/schemastery": "^3.18.4 || ^3.19.0"
+  },
+  "devDependencies": {
+    "@deepseek-ai/schemastery": "^3.19.0"
+  },
+  "dsh": {
+    "engines": {
+      "dsh": ">=0.2.2-rc.1"
+    },
+    "category": "tools",
+    "displayName": "HarnessMM",
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "compatibility": {
+      "dsh": "^0.2.2-rc.1",
+      "dshReleases": {
+        "0.2.2-rc.1": "compatible"
+      },
+      "profiles": [
+        "headless",
+        "web",
+        "desktop"
+      ]
+    }
+  }
+}

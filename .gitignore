@@ -1,0 +1,7 @@
+node_modules/
+npm-debug.log*
+*.log
+receipts.jsonl
+.DS_Store
+Thumbs.db
+coverage/

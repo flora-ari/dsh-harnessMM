@@ -1,0 +1,17 @@
+{
+  "name": "HarnessMM",
+  "description": "在原生工具边界上复用已确定的决策：模型一次写出 CHISEL 动作库，每个候选带一条只读回执的守卫；守卫成立时，用一次经过证书的原生替换代替慢思考回调。",
+  "config.policy.enabled": "启用受守卫的决策复用。开启后会注入计划段落并请模型编写动作库；关闭则回到原生循环。",
+  "config.policy.maximum_candidates": "单个动作库允许的最大候选数（1-16）。",
+  "config.policy.maximum_fast_steps": "图耗尽前允许的最大替换步数（1-16），超过后必须由慢路径重新决策。",
+  "config.policy.maximum_public_bytes": "选择器可见公开状态的最大字节数（1024-65536）。",
+  "config.policy.admission_threshold_tokens": "经选择器替换前必须净省下的 token 数（0-65536）。论文取 1024；若选择器与主请求共享缓存前缀可调低。只有一个幸存候选时会确定性命中，不受此阈值约束。",
+  "config.selector.enabled": "用单字符选择器在多个符合条件的候选中挑选。关闭后多候选步骤直接回到慢路径。",
+  "config.selector.provider": "选择器使用的 Provider。留空则沿用边界请求自身的路由。",
+  "config.selector.model": "选择器使用的模型。留空则沿用边界请求自身的模型。",
+  "config.selector.maxTokens": "选择器调用的 token 预算。",
+  "config.selector.timeoutMs": "选择器调用超时（毫秒）。",
+  "config.shellTools": "计划方言可引用的 shell 工具。留空则从当前工具目录自动识别 bash/pwsh。",
+  "config.planSection": "把 CHISEL 计划段落注入系统提示。",
+  "config.receiptsFile": "回执 JSONL 路径。留空写入 $DSH_HOME/harnessmm/receipts.jsonl。"
+}

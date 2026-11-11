@@ -1,0 +1,23 @@
+dsh-harnessMM
+Copyright 2026 flora-ari
+
+This product includes software derived from HarnessMM
+  https://github.com/YuhuaJiang2002/HarnessMM
+  Copyright Yuhua Jiang, Chang Xu, Feifei Gao and Li Zhao
+  Licensed under the Apache License, Version 2.0.
+
+Its protocol adapter structure follows pi-harnessmm
+  https://github.com/jlon/pi-harnessmm
+  Copyright jlon
+  Licensed under the Apache License, Version 2.0.
+
+The guarded decision reuse, certified callback substitution and Executable
+Decision Graph contracts are described in:
+
+  HarnessMM: Recursive Self-Improvement for Harness Token Efficiency
+  Yuhua Jiang, Chang Xu, Feifei Gao, Li Zhao
+  arXiv:2610.32813, https://arxiv.org/abs/2610.32813
+
+This plugin is an independent adaptation of those contracts to the DeepSeek
+Harness plugin boundary. It is not the reference benchmark harness and makes no
+claim about the paper's reported results.
