@@ -70,8 +70,12 @@ dsh plugin --profile headless add /path/to/dsh-harnessMM
 
 The package ships a bundle patch (`cordis.patch.yml`), so `dsh plugin add` inserts the row
 and the controller is on immediately. It declares `@deepseek-ai/schemastery` as a peer
-dependency; pnpm's default `auto-install-peers` supplies it, which is how the official plugin
-packages install too.
+dependency, the same contract the official plugin packages use; pnpm's default
+`auto-install-peers` supplies it for a git or registry install.
+
+A **local-path** install is a link, and pnpm does not resolve a linked package's peers. Run
+`npm install` once in the plugin directory first, so `@deepseek-ai/schemastery` resolves from
+there; otherwise the row activates but the module import fails with `ERR_MODULE_NOT_FOUND`.
 
 To manage it by hand, add the same row to a profile patch:
 

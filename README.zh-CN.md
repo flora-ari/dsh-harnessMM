@@ -50,8 +50,12 @@ dsh plugin --profile headless add /path/to/dsh-harnessMM
 ```
 
 包内自带 bundle patch（`cordis.patch.yml`），因此 `dsh plugin add` 插入该行后控制器立即生效。
-`@deepseek-ai/schemastery` 声明为 peer 依赖，由 pnpm 默认的 `auto-install-peers` 提供，
-官方插件包也是同样的装法。
+`@deepseek-ai/schemastery` 声明为 peer 依赖，与官方插件包一致；从 git 或 registry 安装时由 pnpm 默认的
+`auto-install-peers` 提供。
+
+**本地路径**安装是 link，pnpm 不会为被 link 的包解析 peer 依赖。请先在插件目录执行一次
+`npm install`，让 `@deepseek-ai/schemastery` 能从那里解析；否则插件行会激活，但模块导入会以
+`ERR_MODULE_NOT_FOUND` 失败。
 
 手工管理时，把同一行写进 profile patch：
 
